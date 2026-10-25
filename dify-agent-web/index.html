@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>知识问答 Agent · 本地工作流</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ============ 顶栏 ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l2.2 5.1 5.3.5-4 3.5 1.2 5.2L12 14.6 7.3 17.3l1.2-5.2-4-3.5 5.3-.5z"/>
+        </svg>
+      </span>
+      <div class="brand-text">
+        <h1>知识问答 Agent</h1>
+        <p>本地部署 · Dify Chatflow</p>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div id="statusPill" class="status-pill status-idle">
+        <span class="dot"></span>
+        <span id="statusText">未连接</span>
+      </div>
+      <button class="btn btn-ghost" id="btnEmbed" title="复制 iframe 嵌入代码">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+        嵌入代码
+      </button>
+      <button class="btn btn-ghost" id="btnSettings" title="连接设置">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 010-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.6a2 2 0 014 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 010 4z"/></svg>
+        设置
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ 主体 ============ -->
+  <main class="layout" id="layout">
+
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+      <!-- 连接信息卡 -->
+      <section class="card">
+        <div class="card-title">当前连接</div>
+        <div class="kv"><span>Dify 地址</span><b id="infoBase">—</b></div>
+        <div class="kv"><span>应用类型</span><b id="infoType">—</b></div>
+        <div class="kv"><span>应用 Token</span><b id="infoToken" class="mono ellipsis">—</b></div>
+        <div class="kv"><span>用户标识</span><b id="infoUser" class="mono ellipsis">—</b></div>
+      </section>
+
+      <!-- 快捷提问 -->
+      <section class="card">
+        <div class="card-title">快捷提问</div>
+        <div class="composer">
+          <input id="quickInput" type="text" placeholder="输入你的问题…" autocomplete="off" />
+          <button class="btn btn-primary btn-sm" id="btnQuickSend">发送</button>
+        </div>
+        <p class="hint">
+          右侧对话区已自带输入框。这里发送会尝试以 <code>postMessage</code> 投递给工作流；
+          若浏览器拦截跨域投递，文本会自动复制到剪贴板，粘贴即可。
+        </p>
+        <div class="chips" id="chips"></div>
+      </section>
+
+      <!-- 会话操作 -->
+      <section class="card">
+        <div class="card-title">会话</div>
+        <div class="btn-row">
+          <button class="btn btn-soft" id="btnNewChat">新建会话</button>
+          <button class="btn btn-soft" id="btnReload">重新加载</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-soft" id="btnProbe">连接自检</button>
+          <button class="btn btn-soft" id="btnFullscreen">专注模式</button>
+        </div>
+      </section>
+
+      <!-- 说明 -->
+      <section class="card card-tip">
+        <div class="card-title">排错指引</div>
+        <ol class="tip-list">
+          <li>Dify 未启动：<code>docker compose up -d</code>，确认能打开 <code>http://localhost</code>。</li>
+          <li>Token 填错：在 Dify 应用 →「访问 API / WebApp」里复制 WebApp 链接。</li>
+          <li>iframe 被拦截：检查 Dify 的 nginx / CSP <code>frame-ancestors</code> 白名单。</li>
+          <li>端口写全：例如 <code>http://localhost:8088</code>，不要只写域名。</li>
+        </ol>
+      </section>
+    </aside>
+
+    <!-- 对话区 -->
+    <section class="stage">
+      <div class="iframe-wrap" id="iframeWrap">
+        <iframe
+          id="difyFrame"
+          title="Dify 工作流"
+          allow="microphone; clipboard-write"
+          referrerpolicy="no-referrer"></iframe>
+
+        <!-- 骨架屏 -->
+        <div class="overlay" id="overlayLoading">
+          <div class="spinner"></div>
+          <p>正在连接本地 Dify 工作流…</p>
+          <small id="loadingUrl" class="mono"></small>
+        </div>
+
+        <!-- 未配置 -->
+        <div class="overlay hidden" id="overlayEmpty">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3>还没有接入工作流</h3>
+          <p>把 Dify 的 WebApp 链接或 iframe 地址粘进来，即可在这里对话。</p>
+          <button class="btn btn-primary" id="btnEmptyConfig">立即配置</button>
+        </div>
+
+        <!-- 连接失败 -->
+        <div class="overlay hidden" id="overlayError">
+          <div class="empty-icon err">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg>
+          </div>
+          <h3>无法加载工作流</h3>
+          <p id="errorMsg" class="mono"></p>
+          <div class="btn-row center">
+            <button class="btn btn-primary" id="btnErrConfig">检查配置</button>
+            <button class="btn btn-soft" id="btnErrRetry">重试</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 设置弹窗 ============ -->
+  <div class="modal-mask hidden" id="modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>连接设置</h2>
+        <button class="icon-btn" id="btnCloseModal" title="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <label class="field">
+          <span>Dify WebApp 链接 / iframe 地址</span>
+          <input id="cfgEmbedUrl" type="text" placeholder="" />
+          <small>粘贴完整链接会自动解析出地址与 Token，也可分开填写。</small>
+        </label>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>Dify 地址</span>
+            <input id="cfgBaseUrl" type="text" placeholder="http://localhost" />
+          </label>
+          <label class="field">
+            <span>应用类型</span>
+            <select id="cfgAppType">
+              <option value="chatbot">chatbot（Chatflow / 聊天助手）</option>
+              <option value="workflow">workflow（工作流）</option>
+              <option value="completion">completion（文本生成）</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>应用 Token</span>
+          <input id="cfgToken" type="text" placeholder="AbCdEfGhIjKlMnOp" class="mono" />
+        </label>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>用户标识 sys.user_id</span>
+            <input id="cfgUserId" type="text" placeholder="留空自动生成" class="mono" />
+          </label>
+          <label class="field">
+            <span>显示名称</span>
+            <input id="cfgUserName" type="text" placeholder="同学" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>开场变量（可选，JSON）</span>
+          <textarea id="cfgInputs" rows="3" placeholder='{"knowledge_base": "软件工程"}'></textarea>
+          <small>作为 <code>sys.inputs</code> 传入 workflow 类型应用。</small>
+        </label>
+
+        <div id="cfgError" class="form-error hidden"></div>
+      </div>
+
+      <div class="modal-foot">
+        <button class="btn btn-soft" id="btnReset">恢复默认</button>
+        <div class="spacer"></div>
+        <button class="btn btn-ghost" id="btnCancel">取消</button>
+        <button class="btn btn-primary" id="btnSave">保存并连接</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

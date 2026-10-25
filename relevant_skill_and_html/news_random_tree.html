@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>四层概率权重树</title>
+<style>
+  :root{
+    --bg:#F7F7F5;
+    --card:#FFFFFF;
+    --line:#D8D7D2;
+    --text:#2C2C2A;
+    --muted:#6B6A65;
+    --purple-fill:#EEEDFE; --purple-line:#7F77DD; --purple-text:#26215C;
+    --blue-fill:#E6F1FB;   --blue-line:#378ADD;   --blue-text:#042C53;
+    --amber-fill:#FAEEDA;  --amber-line:#BA7517;  --amber-text:#412402;
+    --teal-fill:#E1F5EE;   --teal-line:#1D9E75;   --teal-text:#04342C;
+    --gray-fill:#F1EFE8;   --gray-line:#888780;   --gray-text:#2C2C2A;
+    --green-fill:#EAF3DE;  --green-line:#639922;  --green-text:#173404;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:32px 20px 48px;
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:14px; line-height:1.6;
+  }
+  .wrap{max-width:980px;margin:0 auto}
+  h1{font-size:20px;font-weight:500;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 28px}
+  .layer{margin-bottom:8px}
+  .layer-tag{
+    display:inline-block;font-size:12px;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;
+    padding:2px 12px;background:var(--card);margin-bottom:10px;
+  }
+  .row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:stretch}
+  .card{
+    background:var(--card);border:0.5px solid var(--line);border-radius:12px;
+    padding:14px 16px;min-width:180px;max-width:300px;flex:1 1 200px;
+  }
+  .card.c-purple{background:var(--purple-fill);border-color:var(--purple-line);color:var(--purple-text)}
+  .card.c-blue{background:var(--blue-fill);border-color:var(--blue-line);color:var(--blue-text)}
+  .card.c-amber{background:var(--amber-fill);border-color:var(--amber-line);color:var(--amber-text)}
+  .card.c-teal{background:var(--teal-fill);border-color:var(--teal-line);color:var(--teal-text)}
+  .card.c-gray{background:var(--gray-fill);border-color:var(--gray-line);color:var(--gray-text)}
+  .card.c-green{background:var(--green-fill);border-color:var(--green-line);color:var(--green-text)}
+  .t{font-size:14px;font-weight:500}
+  .ts{font-size:12px;opacity:.75}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .out{font-size:12px;font-weight:500;opacity:.9;margin-top:4px}
+  .wline{display:flex;justify-content:space-between;gap:12px;font-size:13px}
+  .conn{display:flex;justify-content:center;gap:60px;margin:6px 0}
+  .conn-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .conn-line{width:1px;height:26px;background:var(--line)}
+  .conn-lab{font-size:12px;color:var(--muted);margin-bottom:2px}
+  .arrow-down{
+    width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;
+    border-top:5px solid var(--line);margin-top:-1px;
+  }
+  .note{
+    margin-top:26px;background:var(--card);border:0.5px solid var(--line);
+    border-radius:12px;padding:16px 18px;
+  }
+  .note h2{font-size:14px;font-weight:500;margin:0 0 8px}
+  .note ul{margin:0;padding-left:20px;color:var(--text)}
+  .note li{font-size:13px;margin:4px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>四层概率权重树 · 新闻生成与爬虫任务分配</h1>
+  <p class="sub">第1层 输入分支 → 第2层 任务选择 → 第3层 类别加权 → 第4层 网址等权 → 结果组装</p>
+
+  <div class="layer">
+    <div class="layer-tag">第 1 层 · 输入分支</div>
+    <div class="row">
+      <div class="card c-purple" style="text-align:center">
+        <div class="t mono">correspond_code</div>
+        <div class="ts">用户输入 1 / 2 / 3</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conn">
+    <div class="conn-item"><div class="conn-lab">输入 1</div><div class="conn-line"></div><div class="arrow-down"></div></div>
+    <div class="conn-item"><div class="conn-lab">输入 2</div><div class="conn-line"></div><div class="arrow-down"></div></div>
+    <div class="conn-item"><div class="conn-lab">输入 3</div><div class="conn-line"></div><div class="arrow-down"></div></div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-tag">第 2 层 · 任务选择</div>
+    <div class="row">
+      <div class="card c-blue">
+        <div class="t">News-1</div>
+        <div class="ts">short report</div>
+        <div class="out">→ result_1，result_2/3 = NULL</div>
+      </div>
+      <div class="card c-amber">
+        <div class="t">News-3</div>
+        <div class="ts">long report</div>
+        <div class="out">→ result_3，result_1/2 = NULL</div>
+      </div>
+      <div class="card c-teal">
+        <div class="t">News-1 + News-2 + News-3</div>
+        <div class="ts">全部生成</div>
+        <div class="out">→ result_1 / result_2 / result_3</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conn">
+    <div class="conn-item"><div class="conn-line"></div><div class="arrow-down"></div></div>
+    <div class="conn-item"><div class="conn-line"></div><div class="arrow-down"></div></div>
+    <div class="conn-item"><div class="conn-line"></div><div class="arrow-down"></div></div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-tag">第 3 层 · 类别加权（random.choices）</div>
+    <div class="row">
+      <div class="card c-blue">
+        <div class="t">News-1</div>
+        <div class="wline"><span>交通事故</span><span>30%</span></div>
+        <div class="wline"><span>交通</span><span>25%</span></div>
+        <div class="wline"><span>动物</span><span>25%</span></div>
+        <div class="wline"><span>自然与环境</span><span>20%</span></div>
+      </div>
+      <div class="card c-teal">
+        <div class="t">News-2</div>
+        <div class="wline"><span>动物</span><span>30%</span></div>
+        <div class="wline"><span>轶事</span><span>30%</span></div>
+        <div class="wline"><span>自然</span><span>20%</span></div>
+        <div class="wline"><span>环境</span><span>20%</span></div>
+      </div>
+      <div class="card c-amber">
+        <div class="t">News-3</div>
+        <div class="wline"><span>科技</span><span>50%</span></div>
+        <div class="wline"><span>健康</span><span>30%</span></div>
+        <div class="wline"><span>自然</span><span>20%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conn">
+    <div class="conn-item"><div class="conn-line"></div><div class="arrow-down"></div></div>
+    <div class="conn-item"><div class="conn-line"></div><div class="arrow-down"></div></div>
+    <div class="conn-item"><div class="conn-line"></div><div class="arrow-down"></div></div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-tag">第 4 层 · 网址池等权抽取（random.choice）</div>
+    <div class="row">
+      <div class="card c-gray">
+        <div class="t">交通池</div>
+        <div class="ts">2 条网址，各 1/2</div>
+        <div class="ts">nypost / apnews</div>
+      </div>
+      <div class="card c-gray">
+        <div class="t">动物池</div>
+        <div class="ts">2 条网址，各 1/2</div>
+        <div class="ts">bbc / theguardian</div>
+      </div>
+      <div class="card c-gray">
+        <div class="t">自然·环境池</div>
+        <div class="ts">2 条网址，各 1/2</div>
+        <div class="ts">bbc future-planet / guardian</div>
+      </div>
+      <div class="card c-gray">
+        <div class="t">轶事池</div>
+        <div class="ts">3 条网址，各 1/3</div>
+        <div class="ts">apnews / npr / usnews</div>
+      </div>
+      <div class="card c-gray">
+        <div class="t">科技池</div>
+        <div class="ts">2 条网址，各 1/2</div>
+        <div class="ts">reuters / bbc</div>
+      </div>
+      <div class="card c-gray">
+        <div class="t">健康池</div>
+        <div class="ts">2 条网址，各 1/2</div>
+        <div class="ts">bbc / usnews</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conn">
+    <div class="conn-item"><div class="conn-line"></div><div class="arrow-down"></div></div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-tag">输出 · JSON 组装</div>
+    <div class="row">
+      <div class="card c-green" style="text-align:center">
+        <div class="t mono">{ "result_1": "https://…", "result_2": "NULL", "result_3": "NULL" }</div>
+        <div class="ts">未执行的分支返回字符串 NULL</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h2>规则说明</h2>
+    <ul>
+      <li>交通类「交通事故 / 交通」共用同一网址池；自然类「自然 / 环境 / 自然环境」共用同一网址池。</li>
+      <li>News-2 仅在输入 3 时生成；输入 2 对应的是 News-3（long report）。</li>
+      <li>类别内部网址等权重，最终 URL 概率 = 类别权重 ÷ 该池网址数量。</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

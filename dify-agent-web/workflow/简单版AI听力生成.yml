@@ -1,0 +1,2304 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: 简单版AI听力生成
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.22@9cea96ffc7977f536c02999c80ff1283b1819aab9b6fa2fdf789d0c6c7d03715
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        knowledge_file_size_limit: 15
+        single_chunk_attachment_limit: 10
+        skill_file_size_limit: 50
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: '你好呀，我是你的CET-4英语听力AI助手（测试版）
+
+      How can I help you?'
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions:
+    - 帮我生成英语听力
+    - 四六级考试都有哪些注意事项
+    - 四级听力都有哪些技巧与策略？
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1792155048525-source-1792324061341-target
+      selected: false
+      source: '1792155048525'
+      sourceHandle: source
+      target: '1792324061341'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: answer
+      id: 1792155790001-source-1792157268399-target
+      selected: false
+      source: '1792155790001'
+      sourceHandle: source
+      target: '1792157268399'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1792157676998-source-1792157268399-target
+      selected: false
+      source: '1792157676998'
+      sourceHandle: source
+      target: '1792157268399'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: human-input
+      id: 1792324061341-1-1792324078893-target
+      selected: false
+      source: '1792324061341'
+      sourceHandle: '1'
+      target: '1792324078893'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: if-else
+      id: 1792324061341-1792326319091-1792745535433-target
+      selected: false
+      source: '1792324061341'
+      sourceHandle: '1792326319091'
+      target: '1792745535433'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: if-else
+      id: 1792324061341-1792326320043-1792745535433-target
+      selected: false
+      source: '1792324061341'
+      sourceHandle: '1792326320043'
+      target: '1792745535433'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1792324061341-1792328027866-1792327175862-target
+      selected: false
+      source: '1792324061341'
+      sourceHandle: '1792328027866'
+      target: '1792327175862'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: if-else
+      id: 1792324061341-2-1792745535433-target
+      selected: false
+      source: '1792324061341'
+      sourceHandle: '2'
+      target: '1792745535433'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: human-input
+        targetType: answer
+      id: 1792324078893-__timeout-1792325284730-target
+      selected: false
+      source: '1792324078893'
+      sourceHandle: __timeout
+      target: '1792325284730'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: human-input
+        targetType: human-input
+      id: 1792324078893-action_1-1792324620256-target
+      selected: false
+      source: '1792324078893'
+      sourceHandle: action_1
+      target: '1792324620256'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: human-input
+        targetType: code
+      id: 1792324620256-All_report_3-1792674898158-target
+      selected: false
+      source: '1792324620256'
+      sourceHandle: All_report_3
+      target: '1792674898158'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: human-input
+        targetType: answer
+      id: 1792324620256-__timeout-1792325284730-target
+      selected: false
+      source: '1792324620256'
+      sourceHandle: __timeout
+      target: '1792325284730'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: human-input
+        targetType: code
+      id: 1792324620256-long_report_2-1792674898158-target
+      selected: false
+      source: '1792324620256'
+      sourceHandle: long_report_2
+      target: '1792674898158'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: human-input
+        targetType: code
+      id: 1792324620256-short_report_1-1792674898158-target
+      selected: false
+      source: '1792324620256'
+      sourceHandle: short_report_1
+      target: '1792674898158'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1792400430769-source-1792157676998-target
+      selected: false
+      source: '1792400430769'
+      sourceHandle: source
+      target: '1792157676998'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1792400590238-source-1792157676998-target
+      selected: false
+      source: '1792400590238'
+      sourceHandle: source
+      target: '1792157676998'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1792400949658-source-1792157676998-target
+      selected: false
+      source: '1792400949658'
+      sourceHandle: source
+      target: '1792157676998'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1792401412463-source-1792157268399-target
+      selected: false
+      source: '1792401412463'
+      sourceHandle: source
+      target: '1792157268399'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1792401412463-source-1792157676998-target
+      selected: false
+      source: '1792401412463'
+      sourceHandle: source
+      target: '1792157676998'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: agent
+      id: 1792414155632-source-1792819015132-target
+      selected: false
+      source: '1792414155632'
+      sourceHandle: source
+      target: '1792819015132'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: agent
+      id: 1792578066726-source-1792819015132-target
+      selected: false
+      source: '1792578066726'
+      sourceHandle: source
+      target: '1792819015132'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1792674898158-source-1792414155632-target
+      selected: false
+      source: '1792674898158'
+      sourceHandle: source
+      target: '1792414155632'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1792674898158-source-1792727139067-target
+      selected: false
+      source: '1792674898158'
+      sourceHandle: source
+      target: '1792727139067'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1792674898158-source-1792738674296-target
+      source: '1792674898158'
+      sourceHandle: source
+      target: '1792738674296'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1792674898158-source-17928287814860-target
+      selected: false
+      source: '1792674898158'
+      sourceHandle: source
+      target: '17928287814860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1792674898158-source-1792828829059-target
+      selected: false
+      source: '1792674898158'
+      sourceHandle: source
+      target: '1792828829059'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: agent
+      id: 1792727139067-source-1792819015132-target
+      source: '1792727139067'
+      sourceHandle: source
+      target: '1792819015132'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1792738674296-source-1792401412463-target
+      selected: false
+      source: '1792738674296'
+      sourceHandle: source
+      target: '1792401412463'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: knowledge-retrieval
+      id: 1792745535433-ee75dbd2-decd-4f7a-bc74-1e1994d149bf-1792400590238-target
+      selected: false
+      source: '1792745535433'
+      sourceHandle: ee75dbd2-decd-4f7a-bc74-1e1994d149bf
+      target: '1792400590238'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: knowledge-retrieval
+      id: 1792745535433-false-1792400949658-target
+      selected: false
+      source: '1792745535433'
+      sourceHandle: 'false'
+      target: '1792400949658'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: knowledge-retrieval
+      id: 1792745535433-true-1792400430769-target
+      selected: false
+      source: '1792745535433'
+      sourceHandle: 'true'
+      target: '1792400430769'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: agent
+        targetType: answer
+      id: 1792819015132-fail-branch-1792824722262-target
+      selected: false
+      source: '1792819015132'
+      sourceHandle: fail-branch
+      target: '1792824722262'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: agent
+        targetType: llm
+      id: 1792819015132-source-llm-target
+      selected: false
+      source: '1792819015132'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 17928287814860-source-1792578066726-target
+      selected: false
+      source: '17928287814860'
+      sourceHandle: source
+      target: '1792578066726'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1792828829059-source-llm-target
+      selected: false
+      source: '1792828829059'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: llm-source-1792155790001-target
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: '1792155790001'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: llm-source-1792157676998-target
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: '1792157676998'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: llm-source-1792401412463-target
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: '1792401412463'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables: []
+      height: 72
+      id: '1792155048525'
+      position:
+        x: 0
+        y: 478.8083333333333
+      positionAbsolute:
+        x: 0
+        y: 478.8083333333333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        is_team_authorization: true
+        meta: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The text to be converted.
+            ja_JP: The text to be converted.
+            pt_BR: The text to be converted.
+            zh_Hans: 要转换的文本。
+          input_schema: null
+          label:
+            en_US: Text
+            ja_JP: Text
+            pt_BR: Text
+            zh_Hans: 文本
+          llm_description: The text to be converted.
+          max: null
+          min: null
+          multiple: false
+          name: text
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: All available TTS models. You can config model in the Model Provider
+              of Settings.
+            ja_JP: All available TTS models. You can config model in the Model Provider
+              of Settings.
+            pt_BR: All available TTS models. You can config model in the Model Provider
+              of Settings.
+            zh_Hans: 所有可用的 TTS 模型。你可以在设置中的模型供应商里配置。
+          input_schema: null
+          label:
+            en_US: Model
+            ja_JP: Model
+            pt_BR: Model
+            zh_Hans: Model
+          llm_description: null
+          max: null
+          min: null
+          multiple: false
+          name: model
+          options:
+          - icon: null
+            label:
+              en_US: qwen3-tts-flash(langgenius/tongyi/tongyi)
+              ja_JP: qwen3-tts-flash(langgenius/tongyi/tongyi)
+              pt_BR: qwen3-tts-flash(langgenius/tongyi/tongyi)
+              zh_Hans: qwen3-tts-flash(langgenius/tongyi/tongyi)
+            value: langgenius/tongyi/tongyi#qwen3-tts-flash
+          - icon: null
+            label:
+              en_US: Listening(langgenius/azure_openai/azure_openai)
+              ja_JP: Listening(langgenius/azure_openai/azure_openai)
+              pt_BR: Listening(langgenius/azure_openai/azure_openai)
+              zh_Hans: Listening(langgenius/azure_openai/azure_openai)
+            value: langgenius/azure_openai/azure_openai#Listening
+          - icon: null
+            label:
+              en_US: Listening2(langgenius/azure_openai/azure_openai)
+              ja_JP: Listening2(langgenius/azure_openai/azure_openai)
+              pt_BR: Listening2(langgenius/azure_openai/azure_openai)
+              zh_Hans: Listening2(langgenius/azure_openai/azure_openai)
+            value: langgenius/azure_openai/azure_openai#Listening2
+          - icon: null
+            label:
+              en_US: tts-1(langgenius/openai_api_compatible/openai_api_compatible)
+              ja_JP: tts-1(langgenius/openai_api_compatible/openai_api_compatible)
+              pt_BR: tts-1(langgenius/openai_api_compatible/openai_api_compatible)
+              zh_Hans: tts-1(langgenius/openai_api_compatible/openai_api_compatible)
+            value: langgenius/openai_api_compatible/openai_api_compatible#tts-1
+          placeholder:
+            en_US: Select a model
+            ja_JP: Select a model
+            pt_BR: Select a model
+            zh_Hans: 选择模型
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: Select a voice for qwen3-tts-flash model
+            ja_JP: Select a voice for qwen3-tts-flash model
+            pt_BR: Select a voice for qwen3-tts-flash model
+            zh_Hans: Select a voice for qwen3-tts-flash model
+          input_schema: null
+          label:
+            en_US: Voice of qwen3-tts-flash(langgenius/tongyi/tongyi)
+            ja_JP: Voice of qwen3-tts-flash(langgenius/tongyi/tongyi)
+            pt_BR: Voice of qwen3-tts-flash(langgenius/tongyi/tongyi)
+            zh_Hans: Voice of qwen3-tts-flash(langgenius/tongyi/tongyi)
+          llm_description: null
+          max: null
+          min: null
+          multiple: false
+          name: voice#langgenius/tongyi/tongyi#qwen3-tts-flash
+          options:
+          - icon: null
+            label:
+              en_US: 芊悦
+              ja_JP: 芊悦
+              pt_BR: 芊悦
+              zh_Hans: 芊悦
+            value: Cherry
+          - icon: null
+            label:
+              en_US: 苏瑶
+              ja_JP: 苏瑶
+              pt_BR: 苏瑶
+              zh_Hans: 苏瑶
+            value: Serena
+          - icon: null
+            label:
+              en_US: 晨煦
+              ja_JP: 晨煦
+              pt_BR: 晨煦
+              zh_Hans: 晨煦
+            value: Ethan
+          - icon: null
+            label:
+              en_US: 千雪
+              ja_JP: 千雪
+              pt_BR: 千雪
+              zh_Hans: 千雪
+            value: Chelsie
+          - icon: null
+            label:
+              en_US: 茉兔
+              ja_JP: 茉兔
+              pt_BR: 茉兔
+              zh_Hans: 茉兔
+            value: Momo
+          - icon: null
+            label:
+              en_US: 十三
+              ja_JP: 十三
+              pt_BR: 十三
+              zh_Hans: 十三
+            value: Vivian
+          - icon: null
+            label:
+              en_US: 月白
+              ja_JP: 月白
+              pt_BR: 月白
+              zh_Hans: 月白
+            value: Moon
+          - icon: null
+            label:
+              en_US: 四月
+              ja_JP: 四月
+              pt_BR: 四月
+              zh_Hans: 四月
+            value: Maia
+          - icon: null
+            label:
+              en_US: 凯
+              ja_JP: 凯
+              pt_BR: 凯
+              zh_Hans: 凯
+            value: Kai
+          - icon: null
+            label:
+              en_US: 不吃鱼
+              ja_JP: 不吃鱼
+              pt_BR: 不吃鱼
+              zh_Hans: 不吃鱼
+            value: Nofish
+          placeholder:
+            en_US: Select a voice
+            ja_JP: Select a voice
+            pt_BR: Select a voice
+            zh_Hans: Select a voice
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: Select a voice for Listening model
+            ja_JP: Select a voice for Listening model
+            pt_BR: Select a voice for Listening model
+            zh_Hans: Select a voice for Listening model
+          input_schema: null
+          label:
+            en_US: Voice of Listening(langgenius/azure_openai/azure_openai)
+            ja_JP: Voice of Listening(langgenius/azure_openai/azure_openai)
+            pt_BR: Voice of Listening(langgenius/azure_openai/azure_openai)
+            zh_Hans: Voice of Listening(langgenius/azure_openai/azure_openai)
+          llm_description: null
+          max: null
+          min: null
+          multiple: false
+          name: voice#langgenius/azure_openai/azure_openai#Listening
+          options:
+          - icon: null
+            label:
+              en_US: Alloy
+              ja_JP: Alloy
+              pt_BR: Alloy
+              zh_Hans: Alloy
+            value: alloy
+          - icon: null
+            label:
+              en_US: Echo
+              ja_JP: Echo
+              pt_BR: Echo
+              zh_Hans: Echo
+            value: echo
+          - icon: null
+            label:
+              en_US: Fable
+              ja_JP: Fable
+              pt_BR: Fable
+              zh_Hans: Fable
+            value: fable
+          - icon: null
+            label:
+              en_US: Onyx
+              ja_JP: Onyx
+              pt_BR: Onyx
+              zh_Hans: Onyx
+            value: onyx
+          - icon: null
+            label:
+              en_US: Nova
+              ja_JP: Nova
+              pt_BR: Nova
+              zh_Hans: Nova
+            value: nova
+          - icon: null
+            label:
+              en_US: Shimmer
+              ja_JP: Shimmer
+              pt_BR: Shimmer
+              zh_Hans: Shimmer
+            value: shimmer
+          placeholder:
+            en_US: Select a voice
+            ja_JP: Select a voice
+            pt_BR: Select a voice
+            zh_Hans: Select a voice
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: Select a voice for Listening2 model
+            ja_JP: Select a voice for Listening2 model
+            pt_BR: Select a voice for Listening2 model
+            zh_Hans: Select a voice for Listening2 model
+          input_schema: null
+          label:
+            en_US: Voice of Listening2(langgenius/azure_openai/azure_openai)
+            ja_JP: Voice of Listening2(langgenius/azure_openai/azure_openai)
+            pt_BR: Voice of Listening2(langgenius/azure_openai/azure_openai)
+            zh_Hans: Voice of Listening2(langgenius/azure_openai/azure_openai)
+          llm_description: null
+          max: null
+          min: null
+          multiple: false
+          name: voice#langgenius/azure_openai/azure_openai#Listening2
+          options:
+          - icon: null
+            label:
+              en_US: Alloy
+              ja_JP: Alloy
+              pt_BR: Alloy
+              zh_Hans: Alloy
+            value: alloy
+          - icon: null
+            label:
+              en_US: Ash
+              ja_JP: Ash
+              pt_BR: Ash
+              zh_Hans: Ash
+            value: ash
+          - icon: null
+            label:
+              en_US: Ballad
+              ja_JP: Ballad
+              pt_BR: Ballad
+              zh_Hans: Ballad
+            value: ballad
+          - icon: null
+            label:
+              en_US: Coral
+              ja_JP: Coral
+              pt_BR: Coral
+              zh_Hans: Coral
+            value: coral
+          - icon: null
+            label:
+              en_US: Echo
+              ja_JP: Echo
+              pt_BR: Echo
+              zh_Hans: Echo
+            value: echo
+          - icon: null
+            label:
+              en_US: Fable
+              ja_JP: Fable
+              pt_BR: Fable
+              zh_Hans: Fable
+            value: fable
+          - icon: null
+            label:
+              en_US: Nova
+              ja_JP: Nova
+              pt_BR: Nova
+              zh_Hans: Nova
+            value: nova
+          - icon: null
+            label:
+              en_US: Onyx
+              ja_JP: Onyx
+              pt_BR: Onyx
+              zh_Hans: Onyx
+            value: onyx
+          - icon: null
+            label:
+              en_US: Sage
+              ja_JP: Sage
+              pt_BR: Sage
+              zh_Hans: Sage
+            value: sage
+          - icon: null
+            label:
+              en_US: Shimmer
+              ja_JP: Shimmer
+              pt_BR: Shimmer
+              zh_Hans: Shimmer
+            value: shimmer
+          - icon: null
+            label:
+              en_US: Verse
+              ja_JP: Verse
+              pt_BR: Verse
+              zh_Hans: Verse
+            value: verse
+          placeholder:
+            en_US: Select a voice
+            ja_JP: Select a voice
+            pt_BR: Select a voice
+            zh_Hans: Select a voice
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: Select a voice for tts-1 model
+            ja_JP: Select a voice for tts-1 model
+            pt_BR: Select a voice for tts-1 model
+            zh_Hans: Select a voice for tts-1 model
+          input_schema: null
+          label:
+            en_US: Voice of tts-1(langgenius/openai_api_compatible/openai_api_compatible)
+            ja_JP: Voice of tts-1(langgenius/openai_api_compatible/openai_api_compatible)
+            pt_BR: Voice of tts-1(langgenius/openai_api_compatible/openai_api_compatible)
+            zh_Hans: Voice of tts-1(langgenius/openai_api_compatible/openai_api_compatible)
+          llm_description: null
+          max: null
+          min: null
+          multiple: false
+          name: voice#langgenius/openai_api_compatible/openai_api_compatible#tts-1
+          options:
+          - icon: null
+            label:
+              en_US: af_bella
+              ja_JP: af_bella
+              pt_BR: af_bella
+              zh_Hans: af_bella
+            value: af_bella
+          placeholder:
+            en_US: Select a voice
+            ja_JP: Select a voice
+            pt_BR: Select a voice
+            zh_Hans: Select a voice
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        params:
+          model: ''
+          text: ''
+          voice#langgenius/azure_openai/azure_openai#Listening: ''
+          voice#langgenius/azure_openai/azure_openai#Listening2: ''
+          voice#langgenius/openai_api_compatible/openai_api_compatible#tts-1: ''
+          voice#langgenius/tongyi/tongyi#qwen3-tts-flash: ''
+        plugin_id: null
+        plugin_unique_identifier: ''
+        provider_icon: /console/api/workspaces/current/tool-provider/builtin/audio/icon
+        provider_icon_dark: null
+        provider_id: audio
+        provider_name: audio
+        provider_show_name: 音频
+        provider_type: builtin
+        selected: false
+        title: 文本转语音
+        tool_configurations:
+          model:
+            type: constant
+            value: langgenius/openai_api_compatible/openai_api_compatible#tts-1
+          voice#langgenius/azure_openai/azure_openai#Listening:
+            type: constant
+            value: alloy
+          voice#langgenius/azure_openai/azure_openai#Listening2:
+            type: constant
+            value: onyx
+          voice#langgenius/azure_openai/azure_openai#tts-1:
+            type: constant
+            value: echo
+          voice#langgenius/openai_api_compatible/openai_api_compatible#tts-1:
+            type: constant
+            value: af_bella
+          voice#langgenius/tongyi/tongyi#qwen3-tts-flash:
+            type: constant
+            value: null
+        tool_description: 将文本转换为音频文件。
+        tool_label: 文本转语音
+        tool_name: tts
+        tool_node_version: '2'
+        tool_parameters:
+          text:
+            type: mixed
+            value: '{{#llm.text#}}'
+        type: tool
+      height: 217
+      id: '1792155790001'
+      position:
+        x: 3210.421417167448
+        y: 89.0029301283327
+      positionAbsolute:
+        x: 3210.421417167448
+        y: 89.0029301283327
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        answer: '{{#llm.text#}}{{#1792155790001.files#}}{{#1792401412463.text#}}{{#1792157676998.text#}}'
+        selected: false
+        title: 最终回复
+        type: answer
+        variables: []
+      height: 156
+      id: '1792157268399'
+      position:
+        x: 3600
+        y: 573.8067099567099
+      positionAbsolute:
+        x: 3600
+        y: 573.8067099567099
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - sys
+          - query
+        desc: 用户问题的最终回答者
+        memory:
+          query_prompt_template: '{{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 100
+        model:
+          completion_params:
+            enable_search: true
+            enable_thinking: false
+            reasoning_effort: xhigh
+            response_format: text
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 993d776f-96b1-466f-a929-4ec5ecc13899
+          role: system
+          text: '四级听力助手 · 四分支路由
+
+            你是 AI 英语四级听力生成与问答助手。先判定用户输入落在哪一类，再按对应分块作答。 {{}} 标记的是运行时注入的上下文，直接使用，不要复述注入内容本身。
+            注入的只是 用户输入与”问题分类“ 片段，可能不完整；缺的部分按四级真题通用口径补全，不要说"资料里没有"。
+
+            一、听力类（注入：{{{#1792401412463.text#}}}}、{{{#llm.text#}}}}）
+
+            一切结论只能来自这两份材料，不得引入外部事实。
+
+            讲题顺序：给答案 → 引定位句 → 逐项说明干扰项错在哪 → 一句可迁移的方法。
+
+            解析用中文，引用原文与选项时保留英文原样。
+
+            二、情感类（注入：{{#1792324061341.class_label#}}}}）
+
+            固定公式：命名情绪 → 正常化 → 归因到一个能改的学习动作 → 一个 5 分钟内能做完的微行动。
+
+            只共情不落地是敷衍，只讲方法不接情绪是冷漠，两者都要避免。
+
+            一次只问一个问题；不说"你应该"；不把学习问题说成人格问题。
+
+            出现持续失眠、食欲明显改变、自伤或轻生表达：立即停止学习建议，先给求助资源并鼓励联系真人。
+
+            禁止：保过包过承诺、心理诊断、贬低激将、过度共情式心理疏导。
+
+            三、技巧类（注入：{{{#1792324061341.class_label#}}}}）
+
+            讲方法必须落到"这一步在选项上具体怎么操作"，配真题例子，不空讲原则。
+
+            优先使用注入片段中的真题示例；片段没有就用四级真题通用套路。
+
+            一次只讲一个法则，讲完请用户拿一道题练手。
+
+            四、注意事项类（注入：{{#1792324061341.class_label#}}}}）
+
+            考务事实（时间、证件、流程、分值、网址）以注入内容为准，原样给出，不概括、不改写。
+
+            注入内容未覆盖的，如实说不确定，禁止编造日期、网址与流程。
+
+            用户问的是"怎么练"而非"怎么考"时，转技巧类。
+
+            通用底线
+
+            回答用简洁中文；被问身份时如实说明是 AI 助手，不冒充真人老师。
+
+            用户答错不说"这么简单都错"；没把握就明说，不硬编。
+
+            一次回答只解决一个问题，不堆砌。
+
+            判定顺序
+
+            一句话可能同时命中多类，优先级：情绪超载 → 情感诉求 → 听力材料相关 → 应试技巧 → 考务注意事项。 拿不准时先归听力类，并用一句确认性问题澄清。'
+        - id: 7ba94a3d-4352-4756-8fcf-578ce3d76a0d
+          role: user
+          text: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output_enabled: false
+        title: 主话语输出LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 145
+      id: '1792157676998'
+      position:
+        x: 3238
+        y: 705.6400432900432
+      positionAbsolute:
+        x: 3238
+        y: 705.6400432900432
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        classes:
+        - id: '1'
+          label: CLASS1
+          name: 要求听力生成，生成听力音频，练习
+        - id: '2'
+          label: CLASS 2
+          name: 礼貌用语，文明问好，情感输出，技能询问
+        - id: '1792326319091'
+          label: CLASS 3
+          name: 询问四级听力的做题技巧
+        - id: '1792326320043'
+          label: CLASS 4
+          name: 询问四六级备考的注意事项
+        - id: '1792328027866'
+          label: CLASS 5
+          name: 无关的问题，比如询问跨学科非英语知识，数学类（46级考试分数分配除外）以及编程类相关话题
+        model:
+          completion_params:
+            enable_search: false
+            enable_thinking: false
+            reasoning_effort: low
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1792155048525'
+        - sys.query
+        selected: false
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 303
+      id: '1792324061341'
+      position:
+        x: 342
+        y: 375.3083333333333
+      positionAbsolute:
+        x: 342
+        y: 375.3083333333333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        delivery_methods:
+        - enabled: true
+          id: 2ca4ef87-998b-414a-aced-2b82546eeb4c
+          type: webapp
+        desc: 将听力的类别分为两类
+        form_content: 好的，请问您要训练第几部分的section （conversation/passage)模块正在开发中
+        inputs: []
+        selected: false
+        timeout: 1
+        timeout_unit: hour
+        title: 听力分类
+        type: human-input
+        user_actions:
+        - button_style: default
+          id: action_1
+          title: News report
+      height: 191
+      id: '1792324078893'
+      position:
+        x: 704
+        y: 288.9787878787879
+      positionAbsolute:
+        x: 704
+        y: 288.9787878787879
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        delivery_methods:
+        - enabled: true
+          id: c97e0e1c-ba33-49ce-8525-c34cf0727acc
+          type: webapp
+        form_content: 好的，请问您是要生成一个短篇还是一个长篇，还是三篇一同生成
+        inputs: []
+        selected: false
+        timeout: 1
+        timeout_unit: hour
+        title: News report Selection
+        type: human-input
+        user_actions:
+        - button_style: primary
+          id: short_report_1
+          title: 一个短篇
+        - button_style: primary
+          id: long_report_2
+          title: 一个长篇
+        - button_style: primary
+          id: All_report_3
+          title: 三篇一同生成
+      height: 215
+      id: '1792324620256'
+      position:
+        x: 1066
+        y: 220.99823232323232
+      positionAbsolute:
+        x: 1066
+        y: 220.99823232323232
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        answer: 抱歉，由于您太长时间未操作，请重新输入
+        selected: false
+        title: Timeout
+        type: answer
+        variables: []
+      height: 115
+      id: '1792325284730'
+      position:
+        x: 1428
+        y: 440.19267676767674
+      positionAbsolute:
+        x: 1428
+        y: 440.19267676767674
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        answer: 哈哈，那很有趣了。不过，目前我只能跟你聊四级听力有关的问题。后续功能还在开发
+        selected: false
+        title: 无关问题回答
+        type: answer
+        variables: []
+      height: 131
+      id: '1792327175862'
+      position:
+        x: 704
+        y: 970.1560966810966
+      positionAbsolute:
+        x: 704
+        y: 970.1560966810966
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - +f2aw7Hn1CyjWCl1aL1tzL3aVzshSfki4LyMm74Mx5n9LsiTPODZdDHpVfAL5Rg6
+        metadata_filtering_mode: disabled
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-rerank
+            provider: langgenius/tongyi/tongyi
+          score_threshold: null
+          top_k: 4
+          weights: null
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1792155048525'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 情感类RAG
+        type: knowledge-retrieval
+      height: 89
+      id: '1792400430769'
+      position:
+        x: 1750
+        y: 719.6918109668109
+      positionAbsolute:
+        x: 1750
+        y: 719.6918109668109
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - VMmKGZp1nFIxumBqiALU9lKmRFWtj2WrMfep6PscxKD0OwNPnTh1ksxPdjlyK4D0
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1792155048525'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 做题技巧类RAG
+        type: knowledge-retrieval
+      height: 89
+      id: '1792400590238'
+      position:
+        x: 1408
+        y: 815.1918109668109
+      positionAbsolute:
+        x: 1408
+        y: 815.1918109668109
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - G6kwHgBq58GT/3NAzfau78RUYYY2++gfZt2+RXIk4/oS6mcf8Jsr2wZ95pHJOMww
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1792155048525'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 注意事项类RAG
+        type: knowledge-retrieval
+      height: 89
+      id: '1792400949658'
+      position:
+        x: 1066
+        y: 910.691810966811
+      positionAbsolute:
+        x: 1066
+        y: 910.691810966811
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - llm
+          - text
+        desc: 生成对应的题目与答案
+        model:
+          completion_params:
+            enable_thinking: false
+            reasoning_effort: xhigh
+            response_format: text
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        prompt_config:
+          jinja2_variables: []
+        prompt_template:
+        - edition_type: basic
+          id: 953f30c4-97a9-4fb0-9311-3630afd0982f
+          role: system
+          text: 你是一个大学英语四级听力的news_report题目生成器按照要求生成对应题目{{#1792738674296.result#}}
+        selected: false
+        title: 题目生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 115
+      id: '1792401412463'
+      position:
+        x: 2755.3620430451087
+        y: 440.19267676767674
+      positionAbsolute:
+        x: 2755.3620430451087
+        y: 440.19267676767674
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        code: "import random\n\n# ========== 第 3 层基础数据：类别 -> 网址池（池内等权重） ==========\n\
+          _URL_TRAFFIC = [\n    \"https://nypost.com/tag/freak-accidents/\",\n   \
+          \ \"https://apnews.com/hub/accidents\",\n]\n_URL_ANIMAL = [\n    \"https://www.bbc.com/news/topics/ce2gz91g2jmt\"\
+          ,\n    \"https://www.theguardian.com/world/animals\",\n]\n_URL_NATURE =\
+          \ [\n    \"https://www.bbc.com/future-planet\",\n    \"https://www.theguardian.com/us/environment\"\
+          ,\n]\n\nURL_POOLS = {\n    \"交通事故\": _URL_TRAFFIC,          # 交通类（事故）\n\
+          \    \"交通\":     _URL_TRAFFIC,          # 交通类\n    \"动物\":     _URL_ANIMAL,\
+          \           # 动物类\n    \"自然\":     _URL_NATURE,           # 自然/环境类\n   \
+          \ \"环境\":     _URL_NATURE,           # 自然/环境类\n    \"轶事\": [\n        \"\
+          https://apnews.com/oddities\",\n        \"https://www.npr.org/sections/strange-news/\"\
+          ,\n        \"https://www.usnews.com/news/offbeat\",\n    ],\n    \"科技\"\
+          : [\n        \"https://www.reuters.com/technology/\",\n        \"https://www.bbc.com/technology\"\
+          ,\n    ],\n    \"健康\": [\n        \"https://www.bbc.com/health\",\n    \
+          \    \"https://www.usnews.com/topics/subjects/exercise\",\n    ],\n}\n\n\
+          # ========== 第 2 层：News 任务 -> (类别, 权重%) ==========\nNEWS_TREE = {\n    1:\
+          \ [(\"交通事故\", 30), (\"交通\", 25), (\"动物\", 25), (\"自然\", 20)],  # News-1\n\
+          \    2: [(\"动物\", 30), (\"轶事\", 30), (\"自然\", 20), (\"环境\", 20)],      #\
+          \ News-2\n    3: [(\"科技\", 50), (\"健康\", 30), (\"自然\", 20)],           \
+          \         # News-3\n}\n\n\ndef _pick_url(news_id: int) -> str:\n    \"\"\
+          \"第 2 层（类别加权）+ 第 3 层（网址等权），返回一个网址字符串\"\"\"\n    categories, weights = zip(*NEWS_TREE[news_id])\n\
+          \    category = random.choices(categories, weights=weights, k=1)[0]  # 第\
+          \ 2 层\n    return random.choice(URL_POOLS[category])                   \
+          \    # 第 3 层\n\n\ndef main(correspond_code: int):\n    \"\"\"第 1 层（输入分支）+\
+          \ 第 4 层（结果组装）\"\"\"\n    code = int(correspond_code)\n\n    # 未生成的任务返回占位字符串\
+          \ \"NULL\"\n    result_1, result_2, result_3 = \" \", \" \", \" \"\n\n \
+          \   if code == 1:            # 只执行 News-1（short report）\n        result_1\
+          \ = _pick_url(1)\n    elif code == 2:          # 只执行 News-3（long report）\n\
+          \        result_3 = _pick_url(3)\n    elif code == 3:          # 全部生成 News-1\
+          \ / News-2 / News-3\n        result_1 = _pick_url(1)\n        result_2 =\
+          \ _pick_url(2)\n        result_3 = _pick_url(3)\n    else:\n        raise\
+          \ ValueError(\"correspond_code 只能为 1 / 2 / 3\")\n\n    # 第 4 层：JSON 形式返回（与输出变量\
+          \ result_1/2/3 对应）\n    return {\n        \"result_1\": result_1,\n    \
+          \    \"result_2\": result_2,\n        \"result_3\": result_3,\n    }"
+        code_language: python3
+        desc: 根据用户输入来执行四层概率树的随机返回算法
+        outputs:
+          result_1:
+            children: null
+            type: string
+          result_2:
+            children: null
+            type: string
+          result_3:
+            children: null
+            type: string
+        selected: false
+        title: 四层随机决策算法
+        type: code
+        variables:
+        - value_selector:
+          - '1792674898158'
+          - result
+          value_type: number
+          variable: correspond_code
+      height: 95
+      id: '1792414155632'
+      position:
+        x: 2042
+        y: 98.80934343434342
+      positionAbsolute:
+        x: 2042
+        y: 98.80934343434342
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        code: "\nfunction main({arg}) {\n    if(arg==1){\n        return{\n\"result\"\
+          :\"---\\nname: cet4-news-brief-one\\ndescription: 把内置爬虫抓回的一篇新闻原始数据，整理成一段约\
+          \ 150 词的英文小 description，供下游 CET-4 听力文本生成节点使用。适用于 agent 策略内置爬虫控制文本的场景；爬虫数据零散或不精准时进行补全与理顺。输出为单个纯英文字符串，不含中文、标题或任何解释性话语。\\\
+          nagent_created: true\\n---\\n\\n# 爬虫数据 → 单篇英文摘要（约 150 词）\\n\\n## 职责\\n\\\
+          n把爬虫抓回的**一篇**新闻原始数据，整理成**一段英文摘要**，交给下游节点扩写成听力正文。\\n只做理解、提炼、补全，**不做翻译，不生成题目，不输出任何解释**。\\\
+          n\\n## 执行步骤\\n\\n1. **通读** —— 读完全部爬虫返回内容（标题、正文片段、时间、来源、可能残缺的 HTML 文本、乱码）。\\\
+          n2. **清洗** —— 剔除广告、导航、版权声明、\\\"Read more\\\"、重复段落、HTML 标签与实体残留、非目标语言的乱码。\\\
+          n3. **抽骨架** —— 判定 Who / What / When / Where / Why / How。爬不到或缺损的项记为未知。\\\
+          n4. **写摘要** —— 按下方要求组织语言。\\n5. **自检并输出**。\\n\\n## 摘要要求\\n\\n- **长度约 150\
+          \ 词**，140–165 之间均可。\\n- **语言**：英文。**任何情况下不得出现中文、解释语或对话语气。**\\n- **时态**：以一般过去时为主；涉及后续安排可用将来时。\\\
+          n- **内容完整**：把这条新闻讲清楚——谁、发生了什么、何时、何地、为什么、结果如何。\\n- **句式**：一句话讲清一件事，句子简短可读，避免嵌套从句。\\\
+          n- **爬虫数据不精准时可以自行补充内容**，但必须遵守：\\n  - 只补与已知信息方向一致的常识性背景与逻辑衔接；\\n  - 补完之后通篇要**逻辑自洽**，不留破绽；\\\
+          n  - **不得凭空捏造**具体人名、机构名、精确数字、日期与直接引语；需要这些而爬虫没给时，改用笼统表述（`local officials`、`several\
+          \ people`、`a nearby town`）。\\n- **词汇难度适中**即可（下游会做四级降级），不要刻意用生僻词，也不要为了凑数堆形容词。\\\
+          n- **不要出现**来源链接、URL、记者署名、抓取时间戳。\\n\\n## 输出格式\\n\\n只输出这一段英文摘要，**单一字符串，纯文本**：\\\
+          n\\n- 不写标题、不写编号、不加\\\"摘要如下\\\"之类引导语\\n- 不用 Markdown（无 `#`、`**`、`-`）\\n-\
+          \ 不含中文、不含任何解释、免责声明、结束语\\n- 不以任何符号开头，以一个完整句 + 句号结束\\n\\n## 交付自检\\n\\n- [\
+          \ ] 长度约 150 词\\n- [ ] 纯英文，无标题、编号、注释、中文、闲聊\\n- [ ] 5W1H 基本交代清楚\\n- [ ] 无广告、链接、HTML\
+          \ 残留\\n- [ ] 自行补全的部分逻辑自洽，且未编造具体实体与精确数字\\n- [ ] 可直接交给下游扩写节点\"\n        }\n\
+          \    }else if(arg==2){\n        return{\n            \"result\":\"---\\\
+          nname: cet4-news-brief-three\\ndescription: 把内置爬虫抓回的三篇新闻原始数据，分别整理成三段各约 150\
+          \ 词的英文小 description，供下游 CET-4 听力文本生成节点一次性扩写成三篇。适用于 agent 策略内置爬虫控制文本的场景；爬虫数据零散或不精准时进行补全与理顺。输出为单个纯英文字符串，三段之间用单独一行\
+          \ ||| 分隔，不含中文、标题或任何解释性话语。\\nagent_created: true\\n---\\n\\n# 爬虫数据 → 三篇英文摘要（每段约\
+          \ 150 词）\\n\\n## 职责\\n\\n把爬虫抓回的**三篇**新闻原始数据，整理成**三段英文摘要**，交给下游节点批量扩写成三篇听力正文。\\\
+          n只做理解、提炼、补全，**不做翻译，不生成题目，不输出任何解释**。\\n\\n## 执行步骤\\n\\n1. **通读与分组** —— 读完全部爬虫返回内容，按来源拆成三组，判断出三个各自独立的核心事件。\\\
+          n2. **清洗** —— 逐组剔除广告、导航、版权声明、\\\"Read more\\\"、重复段落、HTML 标签与实体残留、非目标语言的乱码。\\\
+          n3. **抽骨架** —— 每组各提一次 Who / What / When / Where / Why / How。爬不到或缺损的项记为未知。\\\
+          n4. **写摘要** —— 逐组按下方要求组织语言。\\n5. **排序与去重** —— 三段依次对应下游的 News Report One\
+          \ / Two / Three；**题材尽量错开**，同题材的两段要换一篇。\\n6. **自检并输出**。\\n\\n## 摘要要求（每段）\\\
+          n\\n- **长度约 150 词**，140–165 之间均可。三段总长约 450 词。\\n- **语言**：英文。**任何情况下不得出现中文、解释语或对话语气。**\\\
+          n- **时态**：以一般过去时为主；涉及后续安排可用将来时。\\n- **内容完整**：把这条新闻讲清楚——谁、发生了什么、何时、何地、为什么、结果如何。\\\
+          n- **句式**：一句话讲清一件事，句子简短可读，避免嵌套从句。\\n- **爬虫数据不精准时可以自行补充内容**，但必须遵守：\\n  -\
+          \ 只补与已知信息方向一致的常识性背景与逻辑衔接；\\n  - 补完之后各段要**逻辑自洽**，不留破绽；\\n  - **不得凭空捏造**具体人名、机构名、精确数字、日期与直接引语；需要这些而爬虫没给时，改用笼统表述（`local\
+          \ officials`、`several people`、`a nearby town`）。\\n- **词汇难度适中**即可（下游会做四级降级），不要刻意用生僻词，也不要为了凑数堆形容词。\\\
+          n- **不要出现**来源链接、URL、记者署名、抓取时间戳。\\n- **三段内容互不交叉**：不得互相引用、共用同一事件或写成连续剧情。\\\
+          n\\n## 输出格式\\n\\n输出**一个纯文本字符串**，三段之间用**单独一行 `|||`** 分隔，除此之外全文不再出现该符号：\"\n\
+          \        }\n    }\n    }\n\n"
+        code_language: javascript
+        desc: 根据用户选择来判定返回skill的条件分支算法
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: report _SKILL_return算法1
+        type: code
+        variables:
+        - value_selector:
+          - '17928287814860'
+          - result
+          value_type: number
+          variable: arg
+      height: 95
+      id: '1792578066726'
+      position:
+        x: 2042
+        y: 220.99823232323232
+      positionAbsolute:
+        x: 2042
+        y: 220.99823232323232
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        code: "def main(__action_id: str):\n    if __action_id==\"All_report_3\":\n\
+          \        return {\"result\": 3}\n    elif __action_id==\"long_report_2\"\
+          :\n        return {\"result\": 2}\n    else: \n        return{ \"result\"\
+          : 1}\n"
+        code_language: python3
+        desc: 将对应的操作转化为NUMBER
+        outputs:
+          result:
+            children: null
+            type: number
+        selected: false
+        title: translator
+        type: code
+        variables:
+        - value_selector:
+          - '1792324620256'
+          - __action_id
+          value_type: string
+          variable: __action_id
+      height: 79
+      id: '1792674898158'
+      position:
+        x: 1428
+        y: 281.19267676767674
+      positionAbsolute:
+        x: 1428
+        y: 281.19267676767674
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        code: "\ndef main(arg: int):\n    if arg==1:\n        return{\"result\": 3}\n\
+          \    elif arg==2:\n        return{\"result\": 3}\n    else: \n        return{\"\
+          result\": 6}\n"
+        code_language: python3
+        outputs:
+          result:
+            children: null
+            type: number
+        selected: false
+        title: translator_2
+        type: code
+        variables:
+        - value_selector:
+          - '1792674898158'
+          - result
+          value_type: number
+          variable: arg
+      height: 51
+      id: '1792727139067'
+      position:
+        x: 2042
+        y: 375.3083333333333
+      positionAbsolute:
+        x: 2042
+        y: 375.3083333333333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        code: "\nfunction main({arg}) {\n    if(arg==1){\n        return{\"result\"\
+          :\"# Q1 / Q2 真题题干句式库\\n\\n。\\n用法：优先套用真题原型改写（替换人名、地名、机构名、事件），不要自造句式。\\n改写时保留句式骨架，只替换实词。\\\
+          n\\n---\\n\\n## 何事 · W1 事件经过型\\n\\n真题原型（Q1）：\\n\\n- What happened at a construction\
+          \ site in Brooklyn on Tuesday?\\n- What happened in New York's Prospect\
+          \ Park on Tuesday?\\n- What event will take place in Glasgow?\\n\\n真题原型（Q2）：\\\
+          n\\n- What happened in Scotland last Wednesday?\\n- What finally happened\
+          \ to the old man?\\n\\n通用模板：\\n\\n-  What happened to/on/in + 地点或人物 + 时间状语?\
+          \ \\n-  What finally happened to + 人物/事物? \\n-  What will happen + when/if\
+          \ + 条件? \\n-  What event will take place in + 地点? \\n\\n要点：答案是一个已发生或即将发生的事件，干扰项常为把事件的地点、时间、主体对调。\\\
+          n\\n---\\n\\n## 何事 · W2 信息获知型\\n\\n真题原型（Q1）：\\n\\n- What is the news report\
+          \ mainly about?\\n- What is reported in the news?\\n- What do we learn about\
+          \ the new study from the news report?\\n- What do we learn from the news\
+          \ report about the study?\\n- What do we learn from the police report?\\\
+          n\\n真题原型（Q2）：\\n\\n- What do we learn from the report about tourism in France?\\\
+          n- What do we learn about the cow from the end of the news report?\\n\\\
+          n通用模板：\\n\\n-  What is the news report mainly about? （主旨题，答案应是对全篇的概括）\\\
+          n-  What do we learn from the news report about + X? \\n-  What do we learn\
+          \ about + X? \\n-  What is reported in the news? \\n\\n要点：W2 的正确项往往是概括或推断，不是原文某一句的直接复述。干扰项常为原文提到但只是细节、以偏概全。\\\
+          n\\n---\\n\\n## 何事 · W3 行为举措型（占比最高）\\n\\n真题原型（Q1）：\\n\\n- What are scientists\
+          \ planning to do?\\n- What were people in parts of Scotland advised to do?\\\
+          n- What did Joe's parents decide to do?\\n- What did the old age pensioner\
+          \ plan to do?\\n- What is the finding of the AAA survey?\\n- What problem\
+          \ is Britain facing?\\n- What was the woman's problem?\\n\\n真题原型（Q2）：\\\
+          n\\n- What does the report say about the snake?\\n- What did the head of\
+          \ road policing urge drivers to do?\\n- What did the restaurant 'Number\
+          \ 4'do?\\n- What is the scientists' recommendation?\\n- What does Glasgow\
+          \ City Council say the event will do?\\n- What does the report say was still\
+          \ unclear?\\n- What did the federal government do last month?\\n- What did\
+          \ city officials of Fayetteville want bus drivers to be aware of?\\n\\n通用模板：\\\
+          n\\n-  What did + 主体 + do/decide/attempt/try to do? \\n-  What is/are +\
+          \ 主体 + planning/trying/aiming/hoping to do? \\n-  What were + 群体 + advised/required/urged/expected\
+          \ to do? \\n-  What does the news report say about + X? \\n-  What is the\
+          \ finding/problem/result/recommendation of + X? \\n-  What does + 机构 + say\
+          \ + 事物 + will do? \\n\\n要点：答案是一个动作、举措、计划或研究结论。干扰项常为主体错位（把 A 的计划安到 B 头上）或程度偏移（计划说成已完成）。\\\
+          n\\n---\\n\\n## 何因（Why / cause / purpose）\\n\\n真题原型（Q1）：\\n\\n- Why did\
+          \ John Gordon move out of Abergeldie Castle?\\n- Why does New York State\
+          \ want to turn off Niagara Falls?\\n- According to Google, what was the\
+          \ cause of the accident?\\n- What accounts most for the huge declines in\
+          \ tourism in France?\\n- What has caused the thick clouds in the photos\
+          \ taken by NASA satellite?\\n- Why did the police officer stop the SUV car?\\\
+          n- Why are families across the U.S. looking to this winter with fear?\\\
+          n\\n真题原型（Q2）：\\n\\n- Why did Paula Pierce give Clint Buffington the reward?\\\
+          n- Why did scientists choose to set up a 4G network in their mission?\\\
+          n- What is the cause of the problem according to the UK Health Secretary?\\\
+          n\\n通用模板：\\n\\n-  Why did/does + 主体 + 动作? \\n-  What is/was the cause of\
+          \ + 事件 (+ according to + 来源)? \\n-  What caused / What has caused + 现象?\
+          \ \\n-  What accounts for + 现象? \\n-  What is the purpose of + 事物?  /  For\
+          \ what purpose did + 主体 + 动作? \\n-  What motivated + 人物 + to + 动作? \\n\\\
+          n要点：答案必须是原文明确给出的原因；若原文只给结果未给原因，则不能出此类题。干扰项常为结果当原因。\\n\\n---\\n\\n## 何人（Who\
+          \ / 某人说了什么 / 关于某人的信息）\\n\\n真题原型（Q1）：\\n\\n- What does the news report say\
+          \ about the waiter?\\n- What do we learn about Sherry Christian?\\n- What\
+          \ do we learn from the report about the 55-year-old woman?\\n\\n真题原型（Q2）：\\\
+          n\\n- What does Juan Somavia, Director-General of the International Labour\
+          \ Organization say?\\n- What did the spokesperson for United Airlines say\
+          \ they would do after the incident?\\n- What did the researchers acknowledge?\\\
+          n- What did the boy tell the police officers he was planning to do?\\n-\
+          \ What do NASA officials think about the thick clouds?\\n- What did the\
+          \ director of the city administration say at the end of the news report?\\\
+          n\\n通用模板：\\n\\n-  What does/did + 人物（常带职务同位语）+ say (about + X)? \\n-  What\
+          \ do we learn/know about + 人物 (+ from the news report)? \\n-  What does\
+          \ the news report say about + 人物? \\n-  Who + 谓语动词 + ...? \\n\\n要点：Q2 的何人高频形态是转述某人的话或观点，正确项常含\
+          \ say / think / acknowledge / believe 的 paraphrase。干扰项常为把甲的观点安给乙。\\n\\n---\\\
+          n\\n## 如何（How）—— 本技能中极少出现，备用\\n\\n真题原型：\\n\\n- How did Kelly Swisher feel\
+          \ when she first came across the rat snake?\\n- How was the woman's problem\
+          \ eventually solved?\\n- How have Google's self-driving cars performed so\
+          \ far?\\n\\n通用模板：\\n\\n-  How did + 主体 + 动作? \\n-  How was + 事件 + solved/handled?\
+          \ \\n-  How did + 人物 + feel + 情境? \\n\\n---\\n\\n## 何时 / 何地\\n\\n真题中何时仅出现\
+          \ 1 次、何地为 0 次，不要主动出这两类题。若确需考查时间或地点，应把时间/地点作为选项内容，而题干仍用何事或何因句式。\"}\n    }\n\
+          else if(arg==2){\nreturn{\"result\":\"# Q5 / Q6 / Q7 真题题干句式库\\n\\n来源：2016–2024\
+          \ 年英语四级听力 News Report 全部真题，224 题逐题归类后提取。\\n用法：优先套用真题原型改写（替换人名、地名、机构名、事件），不要自造句式。\\\
+          n\\n---\\n\\n## 何事 · W1 事件经过型\\n\\n真题原型（Q5）：\\n\\n- What happened to the\
+          \ tour boat sailing off the Nicaraguan coast?\\n- What happened to Scott\
+          \ a month ago?\\n- What happened to the Philippine fisherman one day?\\\
+          n- What happened on the streets of Blackhall Colliery?\\n\\n真题原型（Q7）：\\\
+          n\\n- What happened to the little girl according to the news report?\\n-\
+          \ What has happened at Frank's restaurant since the board of free meals\
+          \ was created?\\n- What does the news report say happened finally?\\n- What\
+          \ will happen when the proposed measure comes into effect?\\n\\n通用模板：\\\
+          n\\n-  What happened to + 人物/事物 (+ 时间)? \\n-  What has happened + since\
+          \ + 时间点? \\n-  What does the news report say happened finally? \\n-  What\
+          \ will happen + when + 条件? \\n\\n要点：Q7 是收尾题，W1 常以「最终结果」形态出现，答案落在原文最后一段。\\\
+          n\\n---\\n\\n## 何事 · W2 信息获知型\\n\\n真题原型（Q5）：\\n\\n- What is the news report\
+          \ mainly about?（多次出现）\\n- What do we learn about the first flight of the\
+          \ Airlander 10?\\n- What do we learn from the news report about the Japanese\
+          \ IT firm?\\n- What do we learn about the restaurant?\\n- What do we learn\
+          \ about thundersnows from the report?\\n\\n真题原型（Q6）：\\n\\n- What do we learn\
+          \ from the news report about the helicopter taxi idea?\\n- What do we learn\
+          \ from the report about the cat?\\n\\n真题原型（Q7）：\\n\\n- What do we learn\
+          \ from the news report?\\n\\n通用模板：\\n\\n-  What is the news report mainly\
+          \ about? \\n-  What do we learn from the news report about + X? \\n-  What\
+          \ do we learn about + X + from the report? \\n\\n要点：正确项是概括或一步推断，不是某句的直接复述。干扰项常为「原文提到但只是细节、以偏概全」。\\\
+          n\\n---\\n\\n## 何事 · W3 行为举措型（占比最高）\\n\\n真题原型（Q5）：\\n\\n- What is the U.S.\
+          \ Postal Service planning to do?\\n- What did the three university students\
+          \ invent?\\n- What have six birds been trained to do at a French historical\
+          \ theme park?\\n- What is Bangalore airport trying to do about the helicopter\
+          \ taxi service?\\n- What can people do at Frank's restaurant?\\n- What does\
+          \ the report say the village is going to do for the cat Wibur?\\n- What\
+          \ do the researchers' tests show about the cloned dog?\\n- What is the problem\
+          \ with many companies according to the news report?\\n- What problem is\
+          \ Japan facing?\\n\\n真题原型（Q6）：\\n\\n- What measure has been planned to save\
+          \ costs?\\n- What is Moon Express planning to do?\\n- What will the wildlife\
+          \ management company do with the captured raccoon?\\n- What did Steve Foran\
+          \ and his team do in the experiment?\\n- What did the restaurant manager\
+          \ decide to do recently?\\n- What did mayor Takashi Kawamura offer to do?\\\
+          n- What are electric bike riders supposed to do?\\n- What did the police\
+          \ do when they received the local residents' phone calls?\\n- What do holidaymakers\
+          \ come to Palmador to enjoy?\\n- What does Fukuda encourage his employees\
+          \ to do?\\n- What was the fisherman forced to do?\\n\\n真题原型（Q7）：\\n\\n-\
+          \ What were people advised to do when traveling outside?\\n- What did one\
+          \ online post say?\\n- What did the waitress do about the recovered ring?\\\
+          n- What is the advantage of the Airlander 10 over huge jet planes?\\n- What\
+          \ might affect Japanese domestic produce?\\n- What is the concern of some\
+          \ parents?\\n\\n通用模板：\\n\\n-  What did + 主体 + do/decide/attempt/offer to\
+          \ do? \\n-  What is/are + 主体 + planning/trying/aiming to do? \\n-  What\
+          \ were + 群体 + advised/supposed/required to do? \\n-  What does the report\
+          \ say + 主体 + is going to do? \\n-  What measure/plan + has been + planned/proposed?\
+          \ \\n-  What do + 研究/实验 + show/find about + X? \\n\\n要点：答案是一个动作、举措、计划或研究结论。干扰项常为主体错位或程度偏移（计划说成已完成）。\\\
+          n\\n---\\n\\n## 何人（Who / 某人说了什么 / 关于某人的信息）\\n\\n真题原型（Q5）：\\n\\n- What does\
+          \ the report say about the Dutch king?\\n- What does Guy Wilson say his\
+          \ cafe aims to do?\\n- What does the news report say about the Japanese\
+          \ mayor Takashi Kawamura?\\n\\n真题原型（Q7）：\\n\\n- What did some Olympians\
+          \ say they would do with their medals?\\n- What does the pub owner Lesley\
+          \ Harper say about the cat?\\n- What did Rick Rahim advise parents to do\
+          \ with their kids?\\n- What do estate agents say about Palmador?\\n- What\
+          \ did the firefighters' representative tell the local TV?\\n- What does\
+          \ the king say about passengers at the airport?\\n- What did the policeman\
+          \ John Forster say about the villagers?\\n- Who are the targeted customers\
+          \ of the helicopter taxi service?\\n\\n通用模板：\\n\\n-  What does/did + 人物（常带职务或身份同位语）+\
+          \ say (about + X)? \\n-  What do we know/learn about + 人物? \\n-  What did\
+          \ + 人物 + advise/urge/tell + 对象 + to do? \\n-  Who + 谓语动词 + ...? \\n\\n要点：Q7\
+          \ 是收尾题，何人多以引语转述形态收尾，正确项常含 say / think / believe 的 paraphrase。干扰项常为把甲的观点安给乙。\\\
+          n\\n---\\n\\n## 如何（How）—— 只在 Q6 高频出现\\n\\n真题原型（Q6）：\\n\\n- How did Rick\
+          \ Rahim remove his son's loose tooth?\\n- How many people was the boat carrying?\\\
+          n\\n真题原型（其他位置，备参考）：\\n\\n- How was the woman's problem eventually solved?\\\
+          n- How did Kelly Swisher feel when she first came across the rat snake?\\\
+          n- How have Google's self-driving cars performed so far?\\n- How did the\
+          \ newly discovered creature get its name?\\n\\n通用模板：\\n\\n-  How did + 主体\
+          \ + 动作? （考方式、手段）\\n-  How many + 名词 + ...? （考数量，注意与近音数字混淆项配合）\\n-  How was\
+          \ + 事件 + solved/handled? \\n-  How did + 人物 + feel + 情境? \\n\\n要点：抽中如何时，原文必须明确交代方式或数量，否则改为抽何事。\\\
+          n\\n---\\n\\n## 何时 / 何地\\n\\n真题中何时仅出现 1 次、何地为 0 次，不要主动出这两类题。若确需考查时间或地点，应把时间/地点作为选项内容，而题干仍用何事或何人句。\"\
+          }\n}else{\n    return{\"result\":\"# Q1-Q7 真题题干句式库（精简版）\\n\\n来源：2016–2024\
+          \ 年英语四级听力 News Report 全部真题（224 题）。\\n用法：套用原型改写——替换人名、地名、机构名、事件，保留句式骨架。整套生成时优先用「通用模板」，需要更贴真题时取「真题原型」。\\\
+          n\\n---\\n\\n## 何事 · W1 事件经过型\\n\\n真题原型：\\n\\n- What happened at a construction\
+          \ site in Brooklyn on Tuesday?（Q1）\\n- What happened in Scotland last Wednesday?（Q2）\\\
+          n- What happened to the tour boat sailing off the Nicaraguan coast?（Q5）\\\
+          n- What happened to the little girl according to the news report?（Q7）\\\
+          n- What does the news report say happened finally?（Q7）\\n\\n通用模板：\\n\\n-\
+          \  What happened to/on/in + 地点或人物 + 时间? \\n-  What finally happened to +\
+          \ 人物/事物? \\n-  What has happened + since + 时间点? \\n-  What will happen +\
+          \ when + 条件? \\n-  What event will take place in + 地点? \\n\\n## 何事 · W2\
+          \ 信息获知型\\n\\n真题原型：\\n\\n- What is the news report mainly about?（Q1/Q3/Q5\
+          \ 高频）\\n- What do we learn about the new study from the news report?（Q1）\\\
+          n- What do we learn from the report about tourism in France?（Q2）\\n- What\
+          \ do we learn about the first flight of the Airlander 10?（Q5）\\n- What do\
+          \ we learn from the report about the cat?（Q6）\\n\\n通用模板：\\n\\n-  What is\
+          \ the news report mainly about? \\n-  What do we learn from the news report\
+          \ about + X? \\n-  What do we learn about + X? \\n-  What is reported in\
+          \ the news? \\n\\n## 何事 · W3 行为举措型（占比最高）\\n\\n真题原型：\\n\\n- What are scientists\
+          \ planning to do?（Q1）\\n- What did Joe's parents decide to do?（Q1）\\n- What\
+          \ did the head of road policing urge drivers to do?（Q2）\\n- What are big\
+          \ fast food chains in New York City required to do according to the new\
+          \ rule?（Q3）\\n- What did government officials propose to do to protect the\
+          \ endangered fish?（Q4）\\n- What is the U.S. Postal Service planning to do?（Q5）\\\
+          n- What measure has been planned to save costs?（Q6）\\n- What were people\
+          \ advised to do when traveling outside?（Q7）\\n\\n通用模板：\\n\\n-  What did\
+          \ + 主体 + do/decide/attempt/offer to do? \\n-  What is/are + 主体 + planning/trying/aiming\
+          \ to do? \\n-  What were + 群体 + advised/required/urged/supposed to do? \\\
+          n-  What does the news report say about + X? \\n-  What measure/plan + has\
+          \ been + planned/proposed? \\n-  What do + 研究/实验 + show/find about + X?\
+          \ \\n-  What is the finding/problem/recommendation of + X? \\n\\n## 何因（Why\
+          \ / cause / purpose）\\n\\n真题原型：\\n\\n- Why did John Gordon move out of Abergeldie\
+          \ Castle?（Q1）\\n- What accounts most for the huge declines in tourism in\
+          \ France?（Q1）\\n- Why did Paula Pierce give Clint Buffington the reward?（Q2）\\\
+          n- Why were spraying operations carried out in Dorchester County?（Q3）\\\
+          n- What motivated the mayor of Paris to promote the first World Car-Free\
+          \ Day in her city?（Q4）\\n- Why does Japan limit the import of potatoes?（Q6）\\\
+          n- Why did City Council member Anna Cumber advocate the introduction of\
+          \ electric bikes into Jacksonville?（Q7）\\n\\n通用模板：\\n\\n-  Why did/does\
+          \ + 主体 + 动作? \\n-  What is/was the cause of + 事件 (+ according to + 来源)?\
+          \ \\n-  What caused / What has caused + 现象? \\n-  What accounts for + 现象?\
+          \ \\n-  What is the purpose of + 事物?  /  For what purpose did + 主体 + 动作?\
+          \ \\n-  What motivated + 人物 + to + 动作? \\n\\n## 何人（Who / 引语转述 / 关于某人）\\\
+          n\\n真题原型：\\n\\n- What does the news report say about the waiter?（Q1）\\n-\
+          \ What does Juan Somavia, Director-General of the International Labour Organization\
+          \ say?（Q2）\\n- What do we learn about Tom Moses?（Q3）\\n- What did Keith\
+          \ Porter say at an interview?（Q4）\\n- What does Guy Wilson say his cafe\
+          \ aims to do?（Q5）\\n- What does the news report say about Rick Rahim?（Q6）\\\
+          n- What did some Olympians say they would do with their medals?（Q7）\\n\\\
+          n通用模板：\\n\\n-  What does/did + 人物（常带职务同位语）+ say (about + X)? \\n-  What\
+          \ do we learn/know about + 人物 (+ from the news report)? \\n-  What does\
+          \ the news report say about + 人物? \\n-  What did + 人物 + advise/urge/tell\
+          \ + 对象 + to do? \\n-  Who + 谓语动词 + ...? \\n\\n## 如何（How）—— 主要是 Q6\\n\\n真题原型：\\\
+          n\\n- How did Rick Rahim remove his son's loose tooth?（Q6）\\n- How many\
+          \ people was the boat carrying?（Q6）\\n- How was the woman's problem eventually\
+          \ solved?（Q2）\\n- How did Kelly Swisher feel when she first came across\
+          \ the rat snake?（Q1）\\n\\n通用模板：\\n\\n-  How did + 主体 + 动作? \\n-  How many\
+          \ + 名词 + ...? \\n-  How was + 事件 + solved/handled? \\n-  How did + 人物 +\
+          \ feel + 情境? \\n\\n## 何时 / 何地\\n\\n真题中「何时」仅 1 次、「何地」为 0 次，不要主动出这两类题。要考时间或地点，把它放进选项，题干仍用「何事」或「何人」句式。\"\
+          }\n}\n\n}"
+        code_language: javascript
+        desc: 根据数理统计出每一道题横向的5W1H与出题类别的概率分布，用来返回不同的字符串形式的skill
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: query_skill算法
+        type: code
+        variables:
+        - value_selector:
+          - '1792674898158'
+          - result
+          value_type: number
+          variable: arg
+      height: 111
+      id: '1792738674296'
+      position:
+        x: 2042
+        y: 463.3686263791175
+      positionAbsolute:
+        x: 2042
+        y: 463.3686263791175
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: 05ff0463-89f6-4110-86c3-2ffd2c94e7a5
+            value: '2'
+            varType: string
+            variable_selector:
+            - '1792324061341'
+            - class_name
+          id: 'true'
+          logical_operator: and
+        - case_id: ee75dbd2-decd-4f7a-bc74-1e1994d149bf
+          conditions:
+          - comparison_operator: contains
+            id: b5281fb5-4a5d-4783-8de9-f0da6943fa4d
+            value: '3'
+            varType: string
+            variable_selector:
+            - '1792324061341'
+            - class_name
+          id: ee75dbd2-decd-4f7a-bc74-1e1994d149bf
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 219
+      id: '1792745535433'
+      position:
+        x: 704
+        y: 671.1560966810966
+      positionAbsolute:
+        x: 704
+        y: 671.1560966810966
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: '{{#1792578066726.result#}}'
+          maximum_iterations:
+            type: constant
+            value: 1
+          model:
+            type: constant
+            value:
+              completion_params:
+                enable_search: true
+                enable_thinking: false
+                reasoning_effort: xhigh
+                response_format: text
+              mode: chat
+              model: qwen3.8-max
+              model_type: llm
+              provider: langgenius/tongyi/tongyi
+              type: model-selector
+          query:
+            type: constant
+            value: '{{#1792414155632.result_1#}}{{#1792414155632.result_2#}}{{#1792414155632.result_3#}}'
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: 使用 Firecrawl 搜索网页，并可选择抓取返回的结果。
+              parameters:
+                query:
+                  auto: 1
+                  value: null
+              plugin_id: langgenius/firecrawl
+              provider_name: langgenius/firecrawl/firecrawl
+              provider_show_name: langgenius/firecrawl/firecrawl
+              settings:
+                categories:
+                  value:
+                    type: mixed
+                    value: null
+                country:
+                  value:
+                    type: mixed
+                    value: null
+                enterprise:
+                  value:
+                    type: mixed
+                    value: null
+                excludeDomains:
+                  value:
+                    type: mixed
+                    value: null
+                ignoreInvalidURLs:
+                  value:
+                    type: constant
+                    value: false
+                includeDomains:
+                  value:
+                    type: mixed
+                    value: null
+                limit:
+                  value:
+                    type: variable
+                    value:
+                    - '1792727139067'
+                    - result
+                location:
+                  value:
+                    type: mixed
+                    value: null
+                onlyMainContent:
+                  value:
+                    type: constant
+                    value: null
+                scrapeFormats:
+                  value:
+                    type: mixed
+                    value: null
+                sources:
+                  value:
+                    type: mixed
+                    value: ''
+                tbs:
+                  value:
+                    type: mixed
+                    value: null
+                timeout:
+                  value:
+                    type: constant
+                    value: 60000
+              tool_description: 使用 Firecrawl 搜索网页，并可选择抓取返回的结果。
+              tool_label: 搜索
+              tool_name: search
+              type: builtin
+        agent_strategy_label: FunctionCalling
+        agent_strategy_name: function_calling
+        agent_strategy_provider_name: langgenius/agent/agent
+        default_value: null
+        error_strategy: fail-branch
+        meta:
+          minimum_dify_version: 1.7.0
+          version: 0.0.2
+        output_schema: {}
+        plugin_unique_identifier: langgenius/agent:0.0.51@3c6c32e593b33476cb52f4e5aaf1bf23e1c71b3d07ba64d40690e0dbce3a7e34
+        selected: false
+        title: Agent
+        tool_node_version: '2'
+        type: agent
+      height: 223
+      id: '1792819015132'
+      position:
+        x: 2426.088439142397
+        y: 109.26840929975991
+      positionAbsolute:
+        x: 2426.088439142397
+        y: 109.26840929975991
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        answer: 对不起，生成错误，请重试
+        selected: false
+        title: 直接回复 4
+        type: answer
+        variables: []
+      height: 99
+      id: '1792824722262'
+      position:
+        x: 2921.2686292913986
+        y: 847.9162486504243
+      positionAbsolute:
+        x: 2921.2686292913986
+        y: 847.9162486504243
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        code: "\ndef main(arg: int):\n    if arg==1:\n        return{\"result\": 1}\n\
+          \    elif arg==2:\n        return{\"result\": 1}\n    else: \n        return{\"\
+          result\": 3}\n"
+        code_language: python3
+        desc: ''
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        outputs:
+          result:
+            children: null
+            type: number
+        selected: false
+        title: trans_for_1-1-2
+        type: code
+        variables:
+        - value_selector:
+          - '1792674898158'
+          - result
+          value_type: number
+          variable: arg
+      height: 51
+      id: '17928287814860'
+      position:
+        x: 1750
+        y: 68.35761802547593
+      positionAbsolute:
+        x: 1750
+        y: 68.35761802547593
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        code: "\nfunction main({arg}) {\n    if(arg==1){\n        return {\"result\"\
+          :\"---\\nname: cet4-news-compress-one\\ndescription: 接收一段来自上游 Agent 的英文\
+          \ description 文本（约 150 词），据此扩写生成一篇英语四级（CET-4）听力 Section A 的第一篇 News Report\
+          \ 英文正文，目标 165 词。会自动过滤掉上游可能混入的中文说明、客套话与 Markdown 标记，只保留英文叙述作为事实来源。输出为可直接传入\
+          \ TTS 与低代码平台的纯英文字符串，不含任何标记、字段或文件路径。只出第 1 篇，不生成题目。\\nagent_created: true\\\
+          n---\\n\\n# 摘要字符串 → CET-4 听力 News Report One\\n\\n## 输入输出\\n\\n- **输入**：一段英文\
+          \ description 文本（约 150 词），由上游 Agent 整理爬虫数据后给出。**其中的英文叙述部分即唯一事实来源**，不假设存在标题、正文或任何其他字段。\\\
+          n- **输出**：**一个纯英文字符串**，只有新闻正文，直通 TTS。\\n\\n## 执行步骤\\n\\n1. **净化** —— 上游\
+          \ Agent 可能夹带非正文内容，必须先剔除再使用：中文说明与对话（\\\"好的，这是摘要\\\"、\\\"以下是整理结果\\\"）、解释语、免责声明、Markdown\
+          \ 标记、`SOURCE:` 之类的字段名、代码块围栏。**只保留其中的英文叙述性句子**。净化后若不足以判断核心事件，如实说明无法生成，不得凭空创作。\\\
+          n2. **通读** —— 把净化后的文本当作新闻摘要读完。若过短（不足约 15 词）或残缺到无法判断核心事件，如实说明无法生成。\\n3. **清洗**\
+          \ —— 去除 HTML 标签；实体解码（`&amp;`→`&`、`&#39;`→`'`、`&quot;`→`\\\"`）；删掉来源尾巴、订阅引导、`Read\
+          \ more` 等噪声；若末句被截断，只保留到最后一个完整句，残缺部分**丢弃，不得脑补**。\\n4. **抽骨架** —— 从清洗后文本提取\
+          \ Who / What / When / Where / Why / How。缺项记为未知。\\n5. **扩写** —— 倒金字塔结构：\\\
+          n   - 首句即核心事件，尽量把已知 5W1H 压进去；\\n   - 第二段补细节、引语或数据，**只能来自净化后的输入文本**；\\n \
+          \  - 词数仍不足时，补**无实体指向的通用新闻表述**（如 `Officials said the investigation is continuing.`）。\\\
+          n6. **校准** —— 按口径数字数，不达标就继续删或补，直到进入区间。\\n7. **输出** —— 只输出正文，一个字都不多。\\n\\\
+          n## 目标词数（硬指标）\\n\\n- **News Report One：165 词，允许 ±5（即 160–170）。超出必须重写，宁可略少不可超。**\\\
+          n\\n统计口径：空格分词；连字符词算 1 个；`1.5 million` 算 2 个；专名按空格分词；标点不计。\\n\\n## 用词与句式\\\
+          n\\n- 词汇限四级大纲（约 4500 词）。常用降级：`commence→begin`、`utilize→use`、`implement→carry\
+          \ out`、`significant→big/major`、`approximately→about`、`authorities→officials/police`、`casualties→the\
+          \ dead and the injured`、`surge→jump/rise sharply`、`plummet→fall sharply`、`nevertheless→but/however`、`subsequently→later`、`prior\
+          \ to→before`、`numerous→many`、`a majority of→most`。\\n- 被动改主动；定语从句拆成两句；每句\
+          \ 15–25 词，超过 25 词必拆。\\n- 时态：主体一般过去时，引语内可用现在时或将来时。\\n- **不得虚构人名、地名、机构名、数字、引语或因果关系**——输入文本里没有的一律不写。\\\
+          n- 每篇至少 1 个地名 + 1 个机构或人物名，数字 2–4 处，且全部取自输入文本。\\n- 体裁：这是开场篇，首句要直白、不铺背景、只放\
+          \ 1 个关键细节，写 2 段。\\n\\n## 纯文本硬约束\\n\\n**允许**：英文字母、阿拉伯数字、半角 `,` `.` `?` `!`\
+          \ `'` `-`、双引号（仅用于引语）、空格、换行。\\n\\n**禁止**：\\n\\n- 格局标记：`===`、`##`、`**`、行首\
+          \ `-`、`1.` 序号\\n- 字段名：`SOURCE:` `TOPIC:` `WORD_COUNT:` `PASSAGE:` `SWAPS:`\
+          \ `FLAG:` 等\\n- 括号 `()` `[]`、斜杠 `/`、和号 `&`、省略号 `...`、`!!` 这类连续标点\\n- 缩写形式（`won't`\
+          \ 写成 `will not`）、`etc.` / `e.g.` / `i.e.`\\n- 中文及全角标点\\n- 任何文件路径、目录名、\\\"\
+          参见/读取某文件\\\"之类的提示\\n- 任何引导语（\\\"以下是\\\"\\\"改写如下\\\"\\\"参考译文\\\"）\\n\\n**排版**：段落之间空一行；正文以第一个实词开头，以最后一个句号结束。\\\
+          n\\n**数字可读化**：百分比写 `12 percent`；货币避免小数；时间不用 `15:30` 冒号写法；能取整就取整。\\n\\n##\
+          \ 输出格式\"}\n    }\n    else if(arg==2){\n        return{\"result\":\"---\\\
+          nname: cet4-news-compress-one\\ndescription: 接收一段来自上游 Agent 的英文 description\
+          \ 文本（约 150 词），据此扩写生成一篇英语四级（CET-4）听力 Section A 的第一篇 News Report 英文正文，目标 165\
+          \ 词。会自动过滤掉上游可能混入的中文说明、客套话与 Markdown 标记，只保留英文叙述作为事实来源。输出为可直接传入 TTS 与低代码平台的纯英文字符串，不含任何标记、字段或文件路径。只出第\
+          \ 1 篇，不生成题目。\\nagent_created: true\\n---\\n\\n# 摘要字符串 → CET-4 听力 News Report\
+          \ One\\n\\n## 输入输出\\n\\n- **输入**：一段英文 description 文本（约 150 词），由上游 Agent\
+          \ 整理爬虫数据后给出。**其中的英文叙述部分即唯一事实来源**，不假设存在标题、正文或任何其他字段。\\n- **输出**：**一个纯英文字符串**，只有新闻正文，直通\
+          \ TTS。\\n\\n## 执行步骤\\n\\n1. **净化** —— 上游 Agent 可能夹带非正文内容，必须先剔除再使用：中文说明与对话（\\\
+          \"好的，这是摘要\\\"、\\\"以下是整理结果\\\"）、解释语、免责声明、Markdown 标记、`SOURCE:` 之类的字段名、代码块围栏。**只保留其中的英文叙述性句子**。净化后若不足以判断核心事件，如实说明无法生成，不得凭空创作。\\\
+          n2. **通读** —— 把净化后的文本当作新闻摘要读完。若过短（不足约 15 词）或残缺到无法判断核心事件，如实说明无法生成。\\n3. **清洗**\
+          \ —— 去除 HTML 标签；实体解码（`&amp;`→`&`、`&#39;`→`'`、`&quot;`→`\\\"`）；删掉来源尾巴、订阅引导、`Read\
+          \ more` 等噪声；若末句被截断，只保留到最后一个完整句，残缺部分**丢弃，不得脑补**。\\n4. **抽骨架** —— 从清洗后文本提取\
+          \ Who / What / When / Where / Why / How。缺项记为未知。\\n5. **扩写** —— 倒金字塔结构：\\\
+          n   - 首句即核心事件，尽量把已知 5W1H 压进去；\\n   - 第二段补细节、引语或数据，**只能来自净化后的输入文本**；\\n \
+          \  - 词数仍不足时，补**无实体指向的通用新闻表述**（如 `Officials said the investigation is continuing.`）。\\\
+          n6. **校准** —— 按口径数字数，不达标就继续删或补，直到进入区间。\\n7. **输出** —— 只输出正文，一个字都不多。\\n\\\
+          n## 目标词数（硬指标）\\n\\n- **News Report One：165 词，允许 ±5（即 160–170）。超出必须重写，宁可略少不可超。**\\\
+          n\\n统计口径：空格分词；连字符词算 1 个；`1.5 million` 算 2 个；专名按空格分词；标点不计。\\n\\n## 用词与句式\\\
+          n\\n- 词汇限四级大纲（约 4500 词）。常用降级：`commence→begin`、`utilize→use`、`implement→carry\
+          \ out`、`significant→big/major`、`approximately→about`、`authorities→officials/police`、`casualties→the\
+          \ dead and the injured`、`surge→jump/rise sharply`、`plummet→fall sharply`、`nevertheless→but/however`、`subsequently→later`、`prior\
+          \ to→before`、`numerous→many`、`a majority of→most`。\\n- 被动改主动；定语从句拆成两句；每句\
+          \ 15–25 词，超过 25 词必拆。\\n- 时态：主体一般过去时，引语内可用现在时或将来时。\\n- **不得虚构人名、地名、机构名、数字、引语或因果关系**——输入文本里没有的一律不写。\\\
+          n- 每篇至少 1 个地名 + 1 个机构或人物名，数字 2–4 处，且全部取自输入文本。\\n- 体裁：这是开场篇，首句要直白、不铺背景、只放\
+          \ 1 个关键细节，写 2 段。\\n\\n## 纯文本硬约束\\n\\n**允许**：英文字母、阿拉伯数字、半角 `,` `.` `?` `!`\
+          \ `'` `-`、双引号（仅用于引语）、空格、换行。\\n\\n**禁止**：\\n\\n- 格局标记：`===`、`##`、`**`、行首\
+          \ `-`、`1.` 序号\\n- 字段名：`SOURCE:` `TOPIC:` `WORD_COUNT:` `PASSAGE:` `SWAPS:`\
+          \ `FLAG:` 等\\n- 括号 `()` `[]`、斜杠 `/`、和号 `&`、省略号 `...`、`!!` 这类连续标点\\n- 缩写形式（`won't`\
+          \ 写成 `will not`）、`etc.` / `e.g.` / `i.e.`\\n- 中文及全角标点\\n- 任何文件路径、目录名、\\\"\
+          参见/读取某文件\\\"之类的提示\\n- 任何引导语（\\\"以下是\\\"\\\"改写如下\\\"\\\"参考译文\\\"）\\n\\n**排版**：段落之间空一行；正文以第一个实词开头，以最后一个句号结束。\\\
+          n\\n**数字可读化**：百分比写 `12 percent`；货币避免小数；时间不用 `15:30` 冒号写法；能取整就取整。\\n\\n##\
+          \ 输出格式\"\n   }\n   }else{\n    return{\n        \"result\":\"---\\nname:\
+          \ cet4-news-compress-one-to-three\\ndescription: 接收一段来自上游 Agent 的英文字符串，内含三段各约\
+          \ 150 词的 description（段间以单独一行 ||| 分隔），据此一次性扩写生成三篇英语四级（CET-4）听力 Section A\
+          \ 的 News Report One / Two / Three 英文正文，目标词数依次为 165、163、175。会自动过滤掉上游可能混入的中文说明、客套话与\
+          \ Markdown 标记，只保留英文叙述作为事实来源。输出为可直接传入 TTS 与低代码平台的纯英文字符串，不含任何标记、字段或文件路径。不生成题目。\\\
+          nagent_created: true\\n---\\n\\n# 摘要字符串 ×3 → CET-4 听力 News Report 1-3 整套\\\
+          n\\n## 输入输出\\n\\n- **输入**：一段英文字符串，由上游 Agent 给出，内含三段各约 150 词的 description，段间以**单独一行\
+          \ `|||`** 分隔。**其中的英文叙述部分即唯一事实来源**，不假设存在标题、正文或任何其他字段。\\n- **输出**：**一个纯英文字符串**，三篇正文依次排列，直通\
+          \ TTS。\\n\\n## 目标词数（硬指标）\\n\\n| 篇目 | 目标 | 允许区间 | 段落 |\\n|------|------|----------|------|\\\
+          n| News Report One | **165** | 160–170 | 2 段 |\\n| News Report Two | **163**\
+          \ | 158–168 | 2 段 |\\n| News Report Three | **175** | 170–180 | 2–3 段 |\\\
+          n\\n超出区间必须重写，宁可略少不可超。统计口径：空格分词；连字符词算 1 个；`1.5 million` 算 2 个；专名按空格分词；标点不计。\\\
+          n\\n## 执行步骤\\n\\n1. **净化** —— 上游 Agent 可能夹带非正文内容，必须先剔除再使用：中文说明与对话（\\\"好的，这是摘要\\\
+          \"、\\\"以下是整理结果\\\"）、解释语、免责声明、Markdown 标记、`SOURCE:` 之类的字段名、代码块围栏。**只保留其中的英文叙述性句子**。净化后若不足以判断核心事件，如实说明无法生成，不得凭空创作。\\\
+          n2. **切分** —— 按**单独一行 `|||`** 把净化后的整串切回三段，依次对应 One / Two / Three。切不出三段或某段过短（不足约\
+          \ 15 词）无法判断核心事件时，如实说明，不得虚构补位。\\n3. **清洗** —— 去除 HTML 标签；实体解码（`&amp;`→`&`、`&#39;`→`'`、`&quot;`→`\\\
+          \"`）；删掉来源尾巴、订阅引导、`Read more` 等噪声；末句被截断则只保留到最后一个完整句，**残缺部分丢弃**。\\n4. **抽骨架**\
+          \ —— 每篇各提一次 Who / What / When / Where / Why / How。缺项记为未知。\\n5. **扩写** ——\
+          \ 逐篇按倒金字塔写：\\n   - 首句即核心事件；\\n   - 第二段补细节、引语或数据，**只能来自对应的那一段**；\\n   - 第三篇可写第三段，收在结果、后续措施或展望上，可带\
+          \ `however / but` 转折；\\n   - 词数不足时补**无实体指向的通用新闻表述**（如 `Officials said they\
+          \ are still looking into the matter.`）。\\n6. **校准** —— 三篇分别数字数，逐篇调到达标。\\\
+          n7. **复查** —— 三篇题材不得重复（内部完成，不外写）。\\n8. **输出** —— 只输出三篇正文，一个字都不多。\\n\\n##\
+          \ 用词与句式\\n\\n- 词汇限四级大纲（约 4500 词）。常用降级：`commence→begin`、`utilize→use`、`implement→carry\
+          \ out`、`significant→big/major`、`approximately→about`、`authorities→officials/police`、`casualties→the\
+          \ dead and the injured`、`surge→jump/rise sharply`、`plummet→fall sharply`、`nevertheless→but/however`、`subsequently→later`、`prior\
+          \ to→before`、`numerous→many`、`a majority of→most`。\\n- 被动改主动；定语从句拆成两句；每句\
+          \ 15–25 词，超过 25 词必拆。\\n- 时态：主体一般过去时，引语内可用现在时或将来时。\\n- **不得虚构人名、地名、机构名、数字、引语或因果关系**——输入字符串里没有的一律不写。\\\
+          n- 每篇至少 1 个地名 + 1 个机构或人物名，数字 2–4 处，且全部取自本段。\\n- 体裁差异：One 是开场篇，首句直白、只放 1\
+          \ 个关键细节；Three 是收尾篇，篇幅最长、带转折、末段收束；Two 居中。\\n\\n## 纯文本硬约束\\n\\n**允许**：英文字母、阿拉伯数字、半角\
+          \ `,` `.` `?` `!` `'` `-`、双引号（仅用于引语）、空格、换行。\\n\\n**禁止**：\\n\\n- 格局标记：`===`、`##`、`**`、行首\
+          \ `-`、`1.` 序号\\n- 字段名：`SOURCE:` `TOPIC:` `WORD_COUNT:` `PASSAGE:` `SWAPS:`\
+          \ `FLAG:` 等\\n- 括号 `()` `[]`、斜杠 `/`、和号 `&`、省略号 `...`、`!!` 这类连续标点\\n- 缩写形式（`won't`\
+          \ 写成 `will not`）、`etc.` / `e.g.` / `i.e.`\\n- 中文及全角标点\\n- 任何文件路径、目录名、\\\"\
+          参见/读取某文件\\\"之类的提示\\n- 任何引导语（\\\"以下是\\\"\\\"改写如下\\\"\\\"参考译文\\\"）\\n\\n**排版**：段落之间空一行，三篇之间也空一行，不用任何分隔标记。\\\
+          n\\n**数字可读化**：百分比写 `12 percent`；货币避免小数；时间不用 `15:30` 冒号写法；能取整就取整。\\n\\n##\
+          \ 输出格式\"\n    }\n   }\n}\n"
+        code_language: javascript
+        desc: 用于听力文本的正式生成与TTS传输
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: report_skill_return算法2
+        type: code
+        variables:
+        - value_selector:
+          - '1792674898158'
+          - result
+          value_type: number
+          variable: arg
+      height: 79
+      id: '1792828829059'
+      position:
+        x: 2042
+        y: -36.818551845429766
+      positionAbsolute:
+        x: 2042
+        y: -36.818551845429766
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory: null
+        model:
+          completion_params:
+            enable_search: true
+            enable_thinking: false
+            reasoning_effort: xhigh
+            response_format: text
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: d2bcd500-0501-4d96-bf74-bb19c7a9845c
+          role: system
+          text: '{{#1792828829059.result#}}'
+        - id: f345b0a8-5766-4b35-9bfe-367693da01bc
+          role: user
+          text: '{{#1792819015132.text#}}'
+        selected: false
+        title: 文本变形与清洗数据处理LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: llm
+      position:
+        x: 2784.826052109031
+        y: 103.00645263720482
+      positionAbsolute:
+        x: 2784.826052109031
+        y: 103.00645263720482
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    viewport:
+      x: 136.66988495923886
+      y: 250.8901994092813
+      zoom: 0.25
+  rag_pipeline_variables: []

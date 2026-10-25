@@ -1,0 +1,19 @@
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 依赖与缓存
+node_modules/
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# 本地环境
+.env
+.env.*
+!.env.example
+
+# 工作区数据
+.workbuddy/
